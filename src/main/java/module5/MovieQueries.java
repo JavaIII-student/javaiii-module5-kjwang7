@@ -45,7 +45,7 @@ public class MovieQueries {
 			System.out.println("DELETE FROM MOVIES WHERE UPPER(NAME) = " + "?" +
 							" AND RATING = " + "?" + " AND UPPER(DESCRIPTION) = " + "? ");
 			
-			removeMovie = connection.prepareStatement("DELETE FROM MOVIES WHERE UPPER(NAME) = " + "?" +
+			removeMovie = connection.prepareStatement("DELETE FROM MOVIES WHERE ID = " + "?" + " AND UPPER(NAME) = " + "?" +
 							" AND RATING = " + "?" + " AND UPPER(DESCRIPTION) = " + "? ");
 			
 			
@@ -122,11 +122,12 @@ public class MovieQueries {
 		}
 	}
 
-	public int DeleteMovie(String name, int rating, String description) {
+	public int DeleteMovie(int id, String name, int rating, String description) {
 		try {
-			removeMovie.setString(1, name);
-			removeMovie.setInt(2, rating);
-			removeMovie.setString(3, description);
+			removeMovie.setInt(1, id);
+			removeMovie.setString(2, name);
+			removeMovie.setInt(3, rating);
+			removeMovie.setString(4, description);
 			
 			// Debug
 			//System.out.println(name+","+rating+","+description);

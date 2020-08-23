@@ -140,7 +140,7 @@ public class MovieDBController {
     	Movie currentlySelectedMovie = listView.getSelectionModel().getSelectedItem();
 
     	if (currentlySelectedMovie != null) {
-    		int result = movieQueries.DeleteMovie(
+    		int result = movieQueries.DeleteMovie(currentlySelectedMovie.getId(),
     				currentlySelectedMovie.getName().toUpperCase(), currentlySelectedMovie.getRating(), currentlySelectedMovie.getDescription().toUpperCase());
 
     		if (result != -1) {
