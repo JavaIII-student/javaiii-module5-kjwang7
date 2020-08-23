@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="658.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="module5.MovieDBController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="658.0" xmlns="http://javafx.com/javafx/8.0.162" xmlns:fx="http://javafx.com/fxml/1" fx:controller="module5.MovieDBController">
    <children>
       <Button fx:id="addMovieButton" layoutX="342.0" layoutY="318.0" mnemonicParsing="false" onAction="#addMovieButtonPressed" text="Add Movie" />
       <Label layoutX="266.0" layoutY="22.0" text="Movie Database" />
@@ -22,7 +22,7 @@
       <Label layoutX="23.0" layoutY="401.0" prefHeight="17.0" prefWidth="121.0" text="Filter by movie name:" />
       <TextField fx:id="filterMovieNameField" layoutX="161.0" layoutY="396.0" promptText="Movie name" />
       <Button fx:id="searchButton" layoutX="347.0" layoutY="396.0" mnemonicParsing="false" onAction="#searchButtonPressed" text="Search" />
-      <Button fx:id="browseAllButton" layoutX="419.0" layoutY="396.0" mnemonicParsing="false" onAction="#browseAllButtonPressed" text="Browse All" />
+      <Button fx:id="browseAllButton" layoutX="426.0" layoutY="396.0" mnemonicParsing="false" onAction="#browseAllButtonPressed" text="Browse All" />
       <ListView fx:id="listView" layoutY="67.0" prefHeight="288.0" prefWidth="328.0" />
       <Button fx:id="removeMovieButton" layoutX="438.0" layoutY="318.0" mnemonicParsing="false" onAction="#removeMovieButtonPressed" text="Remove Movie" />
       <Button fx:id="updateMovieButton" layoutX="553.0" layoutY="318.0" mnemonicParsing="false" onAction="#updateMovieButtonPressed" text="Update Movie" />

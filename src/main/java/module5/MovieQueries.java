@@ -12,8 +12,8 @@ import java.util.List;
 
 public class MovieQueries {
 	private static final String URL = "jdbc:derby:MovieDB;create=true";
-	private static final String USERNAME = "javaiii";
-	private static final String PASSWORD = "javaiii";
+	//private static final String USERNAME = "javaiii";
+	//private static final String PASSWORD = "javaiii";
 
 	private Connection connection;
 	private PreparedStatement selectAllMovie;
@@ -25,7 +25,8 @@ public class MovieQueries {
 	public MovieQueries() {
 		try {
 			System.out.println("Connecting to database URL: " + URL);
-			connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			// connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			connection = DriverManager.getConnection(URL);
 
 			resetMovieDatabase();
 
