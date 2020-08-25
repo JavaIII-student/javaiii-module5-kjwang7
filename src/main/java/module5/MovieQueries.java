@@ -39,22 +39,22 @@ public class MovieQueries {
 
 			resetMovieDatabase();
 
-			System.out.println("Creating prepareStatement to select all movies");
+			// System.out.println("Creating prepareStatement to select all movies");
 			selectAllMovie = connection.prepareStatement("SELECT * FROM MOVIES ORDER BY ID");
 			
 
-			System.out.println("Creating prepareStatement to select movies with name starting with specified character");
+			// System.out.println("Creating prepareStatement to select movies with name starting with specified character");
 			selectMovieByName = connection.prepareStatement("SELECT * FROM MOVIES WHERE UPPER(NAME) LIKE ? "
 								+ "ORDER BY NAME");
 
 			selectMovieByID = connection.prepareStatement("SELECT * FROM MOVIES WHERE ID = ?");
 			
-			System.out.println("Creating insert prepareStatement");
+			// System.out.println("Creating insert prepareStatement");
 			insertNewMovie = connection.prepareStatement("INSERT INTO MOVIES " +
 								"(ID, NAME, RATING, DESCRIPTION) " +
 								"VALUES (?, ?, ?, ?)");
 
-			System.out.println("Creating delete prepareStatement");
+			// System.out.println("Creating delete prepareStatement");
 			
 			removeMovie = connection.prepareStatement("DELETE FROM MOVIES WHERE ID = " + "?" + " AND UPPER(NAME) = " + "?" +
 							" AND RATING = " + "?" + " AND UPPER(DESCRIPTION) = " + "? ");
@@ -167,8 +167,7 @@ public class MovieQueries {
 			
 			// Debug
 			//System.out.println(name+","+rating+","+description);
-			
-			
+						
 			return removeMovie.executeUpdate();
 		}
 		catch (SQLException sqlException) {
@@ -203,8 +202,7 @@ public class MovieQueries {
 			
 			// Debug
 			//System.out.println(name+","+rating+","+description);
-			
-			
+						
 			return updateMovie.executeUpdate();
 		}
 		catch (SQLException sqlException) {
@@ -231,9 +229,10 @@ public class MovieQueries {
 			if (!tableExistsInDB("MOVIES")) {
 				//stmt.execute("CREATE TABLE MOVIES (" + "ID INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," +
 				//			"NAME VARCHAR(255)," + "RATING INTEGER," + "description VARCHAR(255)" + ")");
+				System.out.println("Create the MOVIES table in database and insert an example record to the table.");
 				stmt.execute("CREATE TABLE MOVIES (" + "ID INTEGER PRIMARY KEY," +
 						"NAME VARCHAR(255)," + "RATING INTEGER," + "description VARCHAR(255)" + ")");
-				System.out.println("adding values into MOVIES table");
+				//System.out.println("adding values into MOVIES table");
 				stmt.executeUpdate("INSERT INTO MOVIES VALUES (1, 'Example Movie', 5, 'Example Movie')");
 			}
 		} catch (SQLException sqlException) {

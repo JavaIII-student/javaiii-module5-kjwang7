@@ -6,7 +6,7 @@ Each movie has an ​id ​(int), ​name (varchar(255)), ​rating​ from 1 to
 
 The GUI will display the movie information to the user.
 
-**To launch the application, Run src/main/java/module5/MovieDB.java as a Java Application**
+**To run the application, import as a Maven project and then run src/main/java/module5/MovieDB.java as a Java Application**
 
 #### User can:
 

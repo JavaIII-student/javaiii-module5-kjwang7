@@ -1,7 +1,7 @@
 package module5;
 
 /**
- * Controller for the Movie Datbase application
+ * Controller for the Movie Database application
  * @author Kevin
  */
 
@@ -180,7 +180,7 @@ public class MovieDBController {
     			idNumber, nameField.getText().trim(), ratingNumber, descriptionText.getText().trim());
 
     	// Debug
-    	System.out.println("Return value of the add movie operation: " + result);
+    	// System.out.println("Return value of the add movie operation: " + result);
     	
     	if (result == 1) {
     		displayAlert(AlertType.INFORMATION, "Entry Added",
@@ -201,13 +201,6 @@ public class MovieDBController {
      */
     @FXML
     void removeMovieButtonPressed(ActionEvent event) {
-    	//int ratingNumber = 0;
-    	//try {
-    	//	ratingNumber = Integer.parseInt(ratingField.getText());
-    	
-    		
-    		// Debug
-    		//System.out.println(tableView.getSelectionModel().getSelectedItem());
     		
     	Movie currentlySelectedMovie = tableView.getSelectionModel().getSelectedItem();
 
@@ -216,7 +209,7 @@ public class MovieDBController {
     				currentlySelectedMovie.getName().toUpperCase(), currentlySelectedMovie.getRating(), currentlySelectedMovie.getDescription().toUpperCase());
 
         	// Debug
-        	System.out.println("Return value of the remove movie operation: " + result);
+        	// System.out.println("Return value of the remove movie operation: " + result);
 
         	if (result != -1) {
     			displayAlert(AlertType.INFORMATION, "Entry Removed",
@@ -227,14 +220,7 @@ public class MovieDBController {
     					"Unable to remove movie.");
     		}
     	}
-
-
     	getAllEntries();
-    	//}
-    	//catch (NumberFormatException e){
-    	//	displayAlert(AlertType.ERROR, "Invalid entry",
-    	//			"Please enter a valid integer between 1 and 10 for rating and try again.");    		
-    	//}
 
     }
 
@@ -282,7 +268,7 @@ public class MovieDBController {
     				currentlySelectedMovie.getDescription().toUpperCase());
 
         	// Debug
-        	System.out.println("Return value of update movie operation: " + result);
+        	// System.out.println("Return value of update movie operation: " + result);
 
         	if (result != -1) {
     			displayAlert(AlertType.INFORMATION, "Entry Updated",
