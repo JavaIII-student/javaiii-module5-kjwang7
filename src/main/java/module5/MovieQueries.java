@@ -18,6 +18,7 @@ public class MovieQueries {
 	private Connection connection;
 	private PreparedStatement selectAllMovie;
 	private PreparedStatement selectMovieByName;
+	private PreparedStatement selectMovieByID;
 	private PreparedStatement insertNewMovie;
 	private PreparedStatement removeMovie;
 	private PreparedStatement updateMovie;
@@ -31,27 +32,30 @@ public class MovieQueries {
 			resetMovieDatabase();
 
 			System.out.println("Creating prepareStatement to select all movies");
-			selectAllMovie = connection.prepareStatement("SELECT * FROM MOVIES ORDER BY NAME");
+			selectAllMovie = connection.prepareStatement("SELECT * FROM MOVIES ORDER BY ID");
+			
 
 			System.out.println("Creating prepareStatement to select movies with name starting with specified character");
 			selectMovieByName = connection.prepareStatement("SELECT * FROM MOVIES WHERE UPPER(NAME) LIKE ? "
 								+ "ORDER BY NAME");
+
+			selectMovieByID = connection.prepareStatement("SELECT * FROM MOVIES WHERE ID = ?");
 			
 			System.out.println("Creating insert prepareStatement");
 			insertNewMovie = connection.prepareStatement("INSERT INTO MOVIES " +
-								"(NAME, RATING, DESCRIPTION) " +
-								"VALUES (?, ?, ?)");
+								"(ID, NAME, RATING, DESCRIPTION) " +
+								"VALUES (?, ?, ?, ?)");
 
 			System.out.println("Creating delete prepareStatement");
-			System.out.println("DELETE FROM MOVIES WHERE UPPER(NAME) = " + "?" +
-							" AND RATING = " + "?" + " AND UPPER(DESCRIPTION) = " + "? ");
+			//System.out.println("DELETE FROM MOVIES WHERE UPPER(NAME) = " + "?" +
+			//				" AND RATING = " + "?" + " AND UPPER(DESCRIPTION) = " + "? ");
 			
 			removeMovie = connection.prepareStatement("DELETE FROM MOVIES WHERE ID = " + "?" + " AND UPPER(NAME) = " + "?" +
 							" AND RATING = " + "?" + " AND UPPER(DESCRIPTION) = " + "? ");
 			
 			
-			updateMovie = connection.prepareStatement("UPDATE MOVIES SET NAME = " + "?" + ", RATING = " + "?" + ", DESCRIPTION = " + "?"
-									+ " WHERE UPPER(NAME) = " + "?" + " AND RATING = " + "?" + " AND UPPER(DESCRIPTION) = " + "? ");
+			updateMovie = connection.prepareStatement("UPDATE MOVIES SET ID = " + "?" + ", NAME = " + "?" + ", RATING = " + "?" + ", DESCRIPTION = " + "?"
+									+ " WHERE ID = " + "?" + " AND UPPER(NAME) = " + "?" + " AND RATING = " + "?" + " AND UPPER(DESCRIPTION) = " + "? ");
 		} catch (SQLException sqlException) {
 			sqlException.printStackTrace();
 			System.exit(1);
@@ -109,11 +113,12 @@ public class MovieQueries {
 		}		
 	}
 
-	public int AddMovie(String name, int rating, String description) {
+	public int AddMovie(int id, String name, int rating, String description) {
 		try {
-			insertNewMovie.setString(1, name);
-			insertNewMovie.setInt(2, rating);
-			insertNewMovie.setString(3, description);
+			insertNewMovie.setInt(1, id);
+			insertNewMovie.setString(2, name);
+			insertNewMovie.setInt(3, rating);
+			insertNewMovie.setString(4, description);
 			
 			return insertNewMovie.executeUpdate();
 		}
@@ -142,15 +147,17 @@ public class MovieQueries {
 		}
 	}
 	
-	public int UpdateMovie(String name_new, int rating_new, String description_new, String name_curr, int rating_curr, String description_curr) {
+	public int UpdateMovie(int id_new, String name_new, int rating_new, String description_new, int id_curr, String name_curr, int rating_curr, String description_curr) {
 		try {
-			updateMovie.setString(1, name_new);
-			updateMovie.setInt(2, rating_new);
-			updateMovie.setString(3, description_new);
+			updateMovie.setInt(1, id_new);
+			updateMovie.setString(2, name_new);
+			updateMovie.setInt(3, rating_new);
+			updateMovie.setString(4, description_new);
 			
-			updateMovie.setString(4, name_curr);
-			updateMovie.setInt(5, rating_curr);
-			updateMovie.setString(6, description_curr);
+			updateMovie.setInt(5, id_curr);
+			updateMovie.setString(6, name_curr);
+			updateMovie.setInt(7, rating_curr);
+			updateMovie.setString(8, description_curr);
 			
 			// Debug
 			//System.out.println(name+","+rating+","+description);
@@ -170,15 +177,17 @@ public class MovieQueries {
 			stmt = connection.createStatement();
 			//System.out.println("Creating Table - This will throw an exception if the table is already created.");
 			// Debug
-			System.out.println("CREATE TABLE MOVIES (" + "ID INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," +
-							"NAME VARCHAR(255)," + "RATING INTEGER," + "description VARCGAR(255)" + ")");
+			//System.out.println("CREATE TABLE MOVIES (" + "ID INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," +
+			//				"NAME VARCHAR(255)," + "RATING INTEGER," + "description VARCGAR(255)" + ")");
 			
 			// Drop table first
 			//stmt.execute("DROP TABLE MOVIES");
 			
 			if (!tableExistsInDB("MOVIES")) {
-				stmt.execute("CREATE TABLE MOVIES (" + "ID INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," +
-							"NAME VARCHAR(255)," + "RATING INTEGER," + "description VARCHAR(255)" + ")");
+				//stmt.execute("CREATE TABLE MOVIES (" + "ID INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)," +
+				//			"NAME VARCHAR(255)," + "RATING INTEGER," + "description VARCHAR(255)" + ")");
+				stmt.execute("CREATE TABLE MOVIES (" + "ID INTEGER PRIMARY KEY," +
+						"NAME VARCHAR(255)," + "RATING INTEGER," + "description VARCHAR(255)" + ")");
 				System.out.println("adding values into MOVIES table");
 				stmt.executeUpdate("INSERT INTO MOVIES VALUES (DEFAULT, 'Example Movie', 5, 'Example Movie')");
 			}
@@ -205,6 +214,28 @@ public class MovieQueries {
 		return false;
 	}
 	
+	
+    public boolean movieIDExists (int id) {
+        try {
+                selectMovieByID.setInt(1,  id);
+        }
+        catch (SQLException sqlException) {
+                sqlException.printStackTrace();
+                return false;
+        }
+
+        try {
+                ResultSet resultSet = selectMovieByID.executeQuery();
+                if (resultSet.next()) {
+                        return true;
+                }
+        }
+        catch (SQLException sqlException) {
+                sqlException.printStackTrace();
+                return false;
+        }
+        return false;
+    }
 	
 	public void close() {
 		try {
