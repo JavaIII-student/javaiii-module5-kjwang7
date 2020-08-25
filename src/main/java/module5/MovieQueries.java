@@ -1,5 +1,10 @@
 package module5;
 
+/**
+ * This class contains the methods, queries and PreparedStatements for the Movie Database application
+ * @author Kevin
+ */
+
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -23,6 +28,9 @@ public class MovieQueries {
 	private PreparedStatement removeMovie;
 	private PreparedStatement updateMovie;
 
+	/**
+	 * Default constructor. Set up connection to the database, reset the database and set up PreparedStatements.
+	 */
 	public MovieQueries() {
 		try {
 			System.out.println("Connecting to database URL: " + URL);
@@ -47,8 +55,6 @@ public class MovieQueries {
 								"VALUES (?, ?, ?, ?)");
 
 			System.out.println("Creating delete prepareStatement");
-			//System.out.println("DELETE FROM MOVIES WHERE UPPER(NAME) = " + "?" +
-			//				" AND RATING = " + "?" + " AND UPPER(DESCRIPTION) = " + "? ");
 			
 			removeMovie = connection.prepareStatement("DELETE FROM MOVIES WHERE ID = " + "?" + " AND UPPER(NAME) = " + "?" +
 							" AND RATING = " + "?" + " AND UPPER(DESCRIPTION) = " + "? ");
@@ -63,11 +69,14 @@ public class MovieQueries {
 	}
 
 	
-
+	/**
+	 * Get all Movie objects in a list
+	 * @return a List of Movie objects
+	 */
 	public List<Movie> getAllMovies() {
 		try (ResultSet resultSet = selectAllMovie.executeQuery()) {
 			List<Movie> results = new ArrayList<Movie>();
-			
+
 			while (resultSet.next()) {
 				results.add(new Movie(
 						resultSet.getInt("id"),
@@ -80,10 +89,15 @@ public class MovieQueries {
 		catch (SQLException sqlException) {
 			sqlException.printStackTrace();
 		}
-		
+
 		return null;
 	}
 	
+	/**
+	 * Get a Movie object by its name
+	 * @param name Any part of the movie name, case insensitive
+	 * @return A list of Movie objects that partially match the name
+	 */
 	public List<Movie> getMovieByName(String name) {
 		try {
 			//selectMovieByName.setString(1, name.toUpperCase());
@@ -113,6 +127,14 @@ public class MovieQueries {
 		}		
 	}
 
+	/**
+	 * Add a Movie to the database
+	 * @param id Movie id
+	 * @param name Movie name
+	 * @param rating Movie rating
+	 * @param description Movie description
+	 * @return either (1) the row count for SQL Data Manipulation Language (DML) statements or (2) 0 for SQL statements that return nothing. Return -1 if an error is encountered.
+	 */
 	public int AddMovie(int id, String name, int rating, String description) {
 		try {
 			insertNewMovie.setInt(1, id);
@@ -124,10 +146,18 @@ public class MovieQueries {
 		}
 		catch (SQLException sqlException) {
 			sqlException.printStackTrace();
-			return 0;
+			return -1;
 		}
 	}
 
+	/**
+	 * Delete a movie from the dartabase
+	 * @param id Movie id
+	 * @param name Movie name
+	 * @param rating Movie rating
+	 * @param description Moving description
+	 * @return either (1) the row count for SQL Data Manipulation Language (DML) statements or (2) 0 for SQL statements that return nothing. Return -1 if an error is encountered.
+	 */
 	public int DeleteMovie(int id, String name, int rating, String description) {
 		try {
 			removeMovie.setInt(1, id);
@@ -147,6 +177,18 @@ public class MovieQueries {
 		}
 	}
 	
+	/**
+	 * Update movie in the database
+	 * @param id_new New for the movie
+	 * @param name_new New name for the movie
+	 * @param rating_new New rating for the movie
+	 * @param description_new New description for the movie
+	 * @param id_curr Current id for the movie
+	 * @param name_curr Current name for the movie
+	 * @param rating_curr Current rating for the movie
+	 * @param description_curr Current description for the movie
+	 * @return either (1) the row count for SQL Data Manipulation Language (DML) statements or (2) 0 for SQL statements that return nothing. Return -1 if an error is encountered.
+	 */
 	public int UpdateMovie(int id_new, String name_new, int rating_new, String description_new, int id_curr, String name_curr, int rating_curr, String description_curr) {
 		try {
 			updateMovie.setInt(1, id_new);
@@ -171,6 +213,9 @@ public class MovieQueries {
 		}
 	}
 
+	/**
+	 * Reset the movie database. Create the MOVIES table in the database and add an example row, if the table does not exist. If the table exist, do nothing.
+	 */
 	void resetMovieDatabase() {
 		Statement stmt = null;
 		try {
@@ -189,7 +234,7 @@ public class MovieQueries {
 				stmt.execute("CREATE TABLE MOVIES (" + "ID INTEGER PRIMARY KEY," +
 						"NAME VARCHAR(255)," + "RATING INTEGER," + "description VARCHAR(255)" + ")");
 				System.out.println("adding values into MOVIES table");
-				stmt.executeUpdate("INSERT INTO MOVIES VALUES (DEFAULT, 'Example Movie', 5, 'Example Movie')");
+				stmt.executeUpdate("INSERT INTO MOVIES VALUES (1, 'Example Movie', 5, 'Example Movie')");
 			}
 		} catch (SQLException sqlException) {
 			sqlException.printStackTrace();
@@ -197,7 +242,13 @@ public class MovieQueries {
 
 	}
 
-	
+
+	/**
+	 * Check if the table exists in the database.
+	 * @param tableName table name
+	 * @return true if the table already exists, false otherwise.
+	 * @throws SQLException
+	 */
 	private boolean tableExistsInDB (String tableName) throws SQLException {
 		if (connection != null) {
 			DatabaseMetaData dM = connection.getMetaData();
@@ -215,6 +266,11 @@ public class MovieQueries {
 	}
 	
 	
+	/**
+	 * Check if the movie id already exists in the MOVIES table in the database
+	 * @param id Movie id
+	 * @return true of the movie id already exists, false otherwise.
+	 */
     public boolean movieIDExists (int id) {
         try {
                 selectMovieByID.setInt(1,  id);
@@ -237,6 +293,9 @@ public class MovieQueries {
         return false;
     }
 	
+    /**
+     * Close the database connection
+     */
 	public void close() {
 		try {
 			connection.close();

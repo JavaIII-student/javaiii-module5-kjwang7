@@ -18,6 +18,7 @@ public class SceneBuilderFX extends Application {
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("layout.fxml"));
         Scene scene = new Scene(root);
+        //Scene scene = new Scene(root, 1000, 600);
         stage.setScene(scene);
         stage.show();
     }

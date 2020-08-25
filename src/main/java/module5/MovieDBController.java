@@ -1,5 +1,10 @@
 package module5;
 
+/**
+ * Controller for the Movie Datbase application
+ * @author Kevin
+ */
+
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -15,7 +20,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
-//import javafx.scene.text.Text;
+
 
 public class MovieDBController {
 
@@ -63,13 +68,10 @@ public class MovieDBController {
     private final ObservableList<Movie> movieList =
     		FXCollections.observableArrayList();
     
+    /**
+     * The initialize method
+     */
     public void initialize() {
-    	
-    	
-    	
-    	
-    	
-    	
     	
     	tableView.setItems(movieList);
     	
@@ -100,15 +102,25 @@ public class MovieDBController {
     	);
     }
     
+    /**
+     * Get all Movies
+     */
     private void getAllEntries() {
     	movieList.setAll(movieQueries.getAllMovies());
     	selectFirstEntry();
     }
-    
+
+    /**
+     * Select the first entry
+     */
     private void selectFirstEntry() {
     	tableView.getSelectionModel().selectFirst();
     }
-    
+
+    /**
+     * Display movie
+     * @param movie Movie object to be displayed
+     */
     private void displayMovie(Movie movie) {
     	if (movie != null) {
     		idField.setText(movie.getId()+"");
@@ -124,6 +136,10 @@ public class MovieDBController {
     	}
     }
 
+    /**
+     * Actions to take when the Add Movie button is pressed
+     * @param event
+     */
     @FXML
     void addMovieButtonPressed(ActionEvent event) {
     	int idNumber = 0;
@@ -163,6 +179,9 @@ public class MovieDBController {
     	int result = movieQueries.AddMovie(
     			idNumber, nameField.getText().trim(), ratingNumber, descriptionText.getText().trim());
 
+    	// Debug
+    	System.out.println("Return value of the add movie operation: " + result);
+    	
     	if (result == 1) {
     		displayAlert(AlertType.INFORMATION, "Entry Added",
     				"Movie successfully added.");
@@ -176,7 +195,10 @@ public class MovieDBController {
     }
 
     
-    
+    /**
+     * Actions to take when the Remove Movie button is pressed    
+     * @param event
+     */
     @FXML
     void removeMovieButtonPressed(ActionEvent event) {
     	//int ratingNumber = 0;
@@ -193,7 +215,10 @@ public class MovieDBController {
     		int result = movieQueries.DeleteMovie(currentlySelectedMovie.getId(),
     				currentlySelectedMovie.getName().toUpperCase(), currentlySelectedMovie.getRating(), currentlySelectedMovie.getDescription().toUpperCase());
 
-    		if (result != -1) {
+        	// Debug
+        	System.out.println("Return value of the remove movie operation: " + result);
+
+        	if (result != -1) {
     			displayAlert(AlertType.INFORMATION, "Entry Removed",
     					"Movie was successfully removed.");
     		}
@@ -213,6 +238,10 @@ public class MovieDBController {
 
     }
 
+    /**
+     * Actions to take when the Update Movie button is pressed
+     * @param event
+     */
     @FXML
     void updateMovieButtonPressed(ActionEvent event) {
     	Movie currentlySelectedMovie = tableView.getSelectionModel().getSelectedItem();
@@ -252,7 +281,10 @@ public class MovieDBController {
     				currentlySelectedMovie.getId(), currentlySelectedMovie.getName().toUpperCase(), currentlySelectedMovie.getRating(),
     				currentlySelectedMovie.getDescription().toUpperCase());
 
-    		if (result != -1) {
+        	// Debug
+        	System.out.println("Return value of update movie operation: " + result);
+
+        	if (result != -1) {
     			displayAlert(AlertType.INFORMATION, "Entry Updated",
     					"Movie was successfully updated.");
     		}
@@ -266,7 +298,11 @@ public class MovieDBController {
 
     	getAllEntries();
     }
-    
+
+    /**
+     * Actions to take when the Search button is pressed
+     * @param event
+     */
     @FXML
     void searchButtonPressed(ActionEvent event) {
     	List<Movie> movies = movieQueries.getMovieByName(
@@ -282,11 +318,21 @@ public class MovieDBController {
     	}
     }
 
+    /**
+     * Actions to take when the Browse All buton is pressed
+     * @param event
+     */
     @FXML
     void browseAllButtonPressed(ActionEvent event) {
     	getAllEntries();
     }
 
+    /**
+     * Display an Alert
+     * @param type Alert type
+     * @param title Alert title
+     * @param message Alert message
+     */
     private void displayAlert(AlertType type, String title, String message) {
     	Alert alert = new Alert(type);
     	alert.setTitle(title);

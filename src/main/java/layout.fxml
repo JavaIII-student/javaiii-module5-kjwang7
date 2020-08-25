@@ -8,23 +8,23 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="471.0" prefWidth="664.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="module5.MovieDBController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="827.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="module5.MovieDBController">
    <children>
-      <Button fx:id="addMovieButton" layoutX="367.0" layoutY="339.0" mnemonicParsing="false" onAction="#addMovieButtonPressed" text="Add Movie" />
+      <Button fx:id="addMovieButton" layoutX="502.0" layoutY="392.0" mnemonicParsing="false" onAction="#addMovieButtonPressed" text="Add Movie" />
       <Label layoutX="266.0" layoutY="22.0" text="Movie Database" />
-      <Label layoutX="381.0" layoutY="129.0" prefHeight="17.0" prefWidth="89.0" text="Movie name:" />
-      <TextField fx:id="nameField" layoutX="475.0" layoutY="124.0" prefHeight="27.0" prefWidth="182.0" promptText="Movie name" />
-      <Label layoutX="381.0" layoutY="177.0" prefHeight="17.0" prefWidth="89.0" text="Rating:" />
-      <TextField fx:id="ratingField" layoutX="473.0" layoutY="172.0" prefHeight="27.0" prefWidth="182.0" promptText="Number between 1 and 10" />
-      <Label layoutX="381.0" layoutY="227.0" prefHeight="17.0" prefWidth="89.0" text="Description:" />
-      <TextArea fx:id="descriptionText" layoutX="473.0" layoutY="221.0" prefHeight="93.0" prefWidth="182.0" promptText="Description" />
-      <Label layoutX="23.0" layoutY="401.0" prefHeight="17.0" prefWidth="121.0" text="Filter by movie name:" />
-      <TextField fx:id="filterMovieNameField" layoutX="161.0" layoutY="396.0" promptText="Movie name" />
-      <Button fx:id="searchButton" layoutX="347.0" layoutY="396.0" mnemonicParsing="false" onAction="#searchButtonPressed" text="Search" />
-      <Button fx:id="browseAllButton" layoutX="426.0" layoutY="396.0" mnemonicParsing="false" onAction="#browseAllButtonPressed" text="Browse All" />
-      <Button fx:id="removeMovieButton" layoutX="452.0" layoutY="339.0" mnemonicParsing="false" onAction="#removeMovieButtonPressed" text="Remove Movie" />
-      <Button fx:id="updateMovieButton" layoutX="560.0" layoutY="339.0" mnemonicParsing="false" onAction="#updateMovieButtonPressed" text="Update Movie" />
-      <TableView fx:id="tableView" layoutX="-1.0" layoutY="59.0" prefHeight="317.0" prefWidth="365.0">
+      <Label layoutX="503.0" layoutY="138.0" prefHeight="17.0" prefWidth="89.0" text="Movie name:" />
+      <TextField fx:id="nameField" layoutX="625.0" layoutY="135.0" prefHeight="27.0" prefWidth="182.0" promptText="Movie name" />
+      <Label layoutX="506.0" layoutY="194.0" prefHeight="17.0" prefWidth="89.0" text="Rating:" />
+      <TextField fx:id="ratingField" layoutX="624.0" layoutY="191.0" prefHeight="27.0" prefWidth="182.0" promptText="Integer between 1 and 10" />
+      <Label layoutX="505.0" layoutY="244.0" prefHeight="17.0" prefWidth="89.0" text="Description:" />
+      <TextArea fx:id="descriptionText" layoutX="623.0" layoutY="244.0" prefHeight="128.0" prefWidth="182.0" promptText="Description" />
+      <Label layoutX="23.0" layoutY="457.0" prefHeight="17.0" prefWidth="121.0" text="Filter by movie name:" />
+      <TextField fx:id="filterMovieNameField" layoutX="161.0" layoutY="452.0" prefHeight="27.0" prefWidth="188.0" promptText="Movie name" />
+      <Button fx:id="searchButton" layoutX="384.0" layoutY="452.0" mnemonicParsing="false" onAction="#searchButtonPressed" text="Search" />
+      <Button fx:id="browseAllButton" layoutX="477.0" layoutY="452.0" mnemonicParsing="false" onAction="#browseAllButtonPressed" text="Browse All" />
+      <Button fx:id="removeMovieButton" layoutX="599.0" layoutY="392.0" mnemonicParsing="false" onAction="#removeMovieButtonPressed" text="Remove Movie" />
+      <Button fx:id="updateMovieButton" layoutX="717.0" layoutY="392.0" mnemonicParsing="false" onAction="#updateMovieButtonPressed" text="Update Movie" />
+      <TableView fx:id="tableView" layoutX="-1.0" layoutY="59.0" prefHeight="364.0" prefWidth="484.0">
         <columns>
           <TableColumn prefWidth="75.0" text="C1" />
           <TableColumn prefWidth="75.0" text="C2" />
@@ -33,7 +33,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label layoutX="381.0" layoutY="83.0" prefHeight="17.0" prefWidth="89.0" text="Movie ID:" />
-      <TextField fx:id="idField" layoutX="475.0" layoutY="78.0" prefHeight="27.0" prefWidth="182.0" promptText="Integer ID" />
+      <Label layoutX="503.0" layoutY="84.0" prefHeight="17.0" prefWidth="89.0" text="Movie ID:" />
+      <TextField fx:id="idField" layoutX="625.0" layoutY="79.0" prefHeight="27.0" prefWidth="182.0" promptText="Integer ID" />
    </children>
 </AnchorPane>
