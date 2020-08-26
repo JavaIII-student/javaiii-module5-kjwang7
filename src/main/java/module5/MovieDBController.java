@@ -255,7 +255,12 @@ public class MovieDBController {
         		return;
         	}
 
-    		
+            if (movieQueries.movieIDExists(idNumber)) {
+                displayAlert(AlertType.ERROR, "Entry Not Updated",
+                                "Movie ID already exists in the database. Please enter a different movie ID.");
+                return;
+            }
+
     		int result = movieQueries.UpdateMovie(idNumber, nameField.getText().trim(), ratingNumber, descriptionText.getText().trim(),
     				currentlySelectedMovie.getId(), currentlySelectedMovie.getName().toUpperCase(), currentlySelectedMovie.getRating(),
     				currentlySelectedMovie.getDescription().toUpperCase());
