@@ -2,9 +2,13 @@
 
 A Movie Database built with JavaFX for the GUI and derby for the database.
 
-Each movie has an ​id ​(int), ​name (varchar(255)), ​rating​ from 1 to 10 (int), and a ​description​ (varchar(255)). id is the primary key in the movies table.
-
 The GUI will display the movie information to the user.
+
+Name of the derby database is MovieDB. Movies are stored in the table named MOVIES.
+
+Each movie has an ​id ​(int), ​name (varchar(255)), ​rating​ from 1 to 10 (int), and a ​description​ (varchar(255)). id is the primary key in the MOVIES table.
+
+The application initially has two example movies in the database.
 
 **To run the application, import as a Maven project and then run src/main/java/module5/MovieDB.java as a Java Application**
 
