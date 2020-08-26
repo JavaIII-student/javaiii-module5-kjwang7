@@ -75,12 +75,9 @@ public class MovieDBController {
     	
     	tableView.setItems(movieList);
     	
-    	//tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    	
     	TableColumn<Movie,Integer> idCol = new TableColumn<Movie,Integer>("id");
     	idCol.setCellValueFactory(new PropertyValueFactory<Movie,Integer>("id"));
     	TableColumn<Movie,String> nameCol = new TableColumn<Movie,String>("name");
-    	//nameCol.setCellValueFactory(new PropertyValueFactory<Movie,String>("name"));
     	nameCol.setCellValueFactory(new PropertyValueFactory<Movie,String>("name"));
     	TableColumn<Movie,Integer> ratingCol = new TableColumn<Movie,Integer>("rating");
     	ratingCol.setCellValueFactory(new PropertyValueFactory<Movie,Integer>("rating"));
@@ -88,10 +85,6 @@ public class MovieDBController {
     	descriptionCol.setCellValueFactory(new PropertyValueFactory<Movie,String>("description"));
     	 
     	tableView.getColumns().setAll(idCol, nameCol, ratingCol, descriptionCol);
-    	//tableView.getColumns().setAll(idCol, nameCol, ratingCol);
-    	//tableView.getColumns().setAll(nameCol, descriptionCol);
-
-    	
     	
     	getAllEntries();
     	
