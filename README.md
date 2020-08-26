@@ -10,7 +10,7 @@ The GUI will display the movie information to the user.
 
 #### User can:
 
-**1. Add movies to the database. When a new movie is added, it will be displayed to the user.**
+**1. Add movies to the database.** When a new movie is added, it will be displayed to the user.
 
 Movie id must be entered as an integer. Otherwise, an error dialogue will pop up to remind the user.
 
@@ -18,10 +18,10 @@ Movie id must be unique, i.e., different from any id of existing movies in the d
 
 Movie rating must be an integer between 1 and 10. Otherwise, an error dialogue will pop up.
 
-**2. Remove movies from the database**
+**2. Remove movies from the database.**
 
 **3. Update movies in the database.**
 
-Same requirements as for adding movies, described in 1.
+Same requirements as for adding movies, as described in 1.
 
-**4. Search movies based on name (partial match)**
+**4. Search movies based on name (partial match).**
