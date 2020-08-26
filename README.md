@@ -10,7 +10,7 @@ The GUI will display the movie information to the user.
 
 #### User can:
 
-**1. Add movies to the database. Wwhen a new movie is added, it will be displayed to the user.**
+**1. Add movies to the database. When a new movie is added, it will be displayed to the user.**
 
 Movie id must be entered as an integer. Otherwise, an error dialogue will pop up to remind the user.
 
