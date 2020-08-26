@@ -255,7 +255,9 @@ public class MovieDBController {
         		return;
         	}
 
-            if (movieQueries.movieIDExists(idNumber)) {
+        	// When the user updates the current selected movie to an id that matches with the id of a different movie not in selection, pop up an error.
+        	// If the user updates the id of the currently selected movie, this is fine and update will proceed.
+            if ( (currentlySelectedMovie.getId() != idNumber) && (movieQueries.movieIDExists(idNumber)) ) {
                 displayAlert(AlertType.ERROR, "Entry Not Updated",
                                 "Movie ID already exists in the database. Please enter a different movie ID.");
                 return;
