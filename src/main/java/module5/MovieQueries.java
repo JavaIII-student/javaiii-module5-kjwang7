@@ -151,7 +151,7 @@ public class MovieQueries {
 	}
 
 	/**
-	 * Delete a movie from the dartabase
+	 * Delete a movie from the database
 	 * @param id Movie id
 	 * @param name Movie name
 	 * @param rating Movie rating
